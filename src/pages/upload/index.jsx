@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-import {ref, uploadBytes, listAll, getDownloadURL} from 'firebase/storage';
+import {ref, uploadBytes, listAll, getDownloadURL, updateMetadata} from 'firebase/storage';
 import { storage } from "../../firebase";
 import {v4} from 'uuid';
 
@@ -12,8 +12,24 @@ const Upload =()=>{
     const[imageList, setImageList] = useState([]);
     
     const imageListRef = ref(storage, "images/")
+    
+    // Create file metadata to update
+    const metadata = {
+        customMetadata: {
+          'location': 'Yosemite, CA, USA',
+          'activity': 'Hiking'
+        }
+      };
 
     const uploadImage = () =>{
+
+        updateMetadata(imageListRef,metadata )
+            .then((metadata) => {
+                // Updated metadata for 'images/forest.jpg' is returned in the Promise
+            }).catch((error) => {
+                // Uh-oh, an error occurred!
+            });
+
         console.log("Trying to upload")
         if(imageUpload == null){
             console.log("no images uploaded")
