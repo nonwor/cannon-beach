@@ -5,7 +5,7 @@ import app from '../../firebase';
 import {useState} from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import {authinfo} from '../../slice/authuserSlice.js'
+import {authinfo,clearUserInfo} from '../../slice/authuserSlice.js'
 
 const Login = ()=>{
 
@@ -74,6 +74,9 @@ const Login = ()=>{
     const handleSignOut = () =>{
         signOut(auth).then(() => {
             // Sign-out successful.
+            console.log("successful logout")
+            dispatch(clearUserInfo())
+
           }).catch((error) => {
             // An error happened.
           });

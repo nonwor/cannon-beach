@@ -18,6 +18,7 @@ const Upload =()=>{
 
     //User id/ogimages/
     const user_id = useSelector(state =>state.userInfo);
+    console.log(user_id)
 
     const imageListRef = ref(storage, `${user_id.uid}/ogimages/`)
 
@@ -57,21 +58,31 @@ const Upload =()=>{
         })
     }, [])
 
-    return(
-        <>
-            <h1>Upload</h1>
-            
-            <div className="upload-function">
-                {/* This is actually an array, so for now we will do one image at a time */}
-                <input type='file' onChange={(event)=>{setImageUpload(event.target.files)}}/>
-                <Button onClick={uploadImage}>Upload Image</Button>
-            </div>
-            {imageList.map((url)=>{
-                return <img src={url}/>
-            })}
+    if(user_id.uid != ''){
+        return(
+            <>
+                <h1>Upload</h1>
+                
+                <div className="upload-function">
+                    {/* This is actually an array, so for now we will do one image at a time */}
+                    <input type='file' onChange={(event)=>{setImageUpload(event.target.files[0])}}/>
+                    <Button onClick={uploadImage}>Upload Image</Button>
+                </div>
+                {imageList.map((url)=>{
+                    return <img src={url}/>
+                })}
+    
+            </>
+        )
+    } else {
+        return(
+            <>
+            <h4>You need to be logged in to make this happen</h4>
+            </>
+        )
+    }
 
-        </>
-    )
+    
 }
 
 export default Upload;
