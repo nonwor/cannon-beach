@@ -4,12 +4,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Navbar, Nav, NavDropdown, Container} from 'react-bootstrap';
 import { Link, useNavigate} from 'react-router-dom';
 
+import { useSelector, useDispatch } from "react-redux";
+
 const NavigateBar = () =>{
 
-    const navigate = useNavigate()
+    const user_status = useSelector(state =>state.userInfo);
 
     const handleLogoutAction =()=>{
-
+        console.log(user_status)
     }
 
     return(
