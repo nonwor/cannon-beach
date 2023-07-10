@@ -2,25 +2,42 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-import {ref, uploadBytes, listAll, getDownloadURL} from 'firebase/storage';
-import { storage } from "../../firebase";
+import {getStorage} from "firebase/storage";
+import {ref, uploadBytes, listAll, getDownloadURL, updateMetadata} from 'firebase/storage';
+import app  from "../../firebase.js";
 import {v4} from 'uuid';
+
+import { useSelector } from "react-redux";
 
 const Upload =()=>{
 
     const[imageUpload, setImageUpload] = useState(null);
     const[imageList, setImageList] = useState([]);
     
-    const imageListRef = ref(storage, "images/")
+    const storage = getStorage(app);
+
+    //User id/ogimages/
+    const user_id = useSelector(state =>state.userInfo);
+
+    const imageListRef = ref(storage, `${user_id.uid}/ogimages/`)
 
     const uploadImage = () =>{
+
+        // updateMetadata(imageListRef,metadata )
+        //     .then((metadata) => {
+        //         // Updated metadata for 'images/forest.jpg' is returned in the Promise
+        //     }).catch((error) => {
+        //         // Uh-oh, an error occurred!
+        //     });
+
         console.log("Trying to upload")
         if(imageUpload == null){
             console.log("no images uploaded")
             alert("Failed")
         }
         console.log("Good to go", imageUpload);
-        const imageRef = ref(storage, `images/${imageUpload.name}`)
+        console.log(`${user_id.uid}/ogimages/${imageUpload.name}`)
+        const imageRef = ref(storage, `${user_id.uid}/ogimages/${imageUpload.name}`)
         uploadBytes(imageRef, imageUpload).then((response)=>{
             console.log("Response",response)
             alert("image uploaded!")
@@ -43,9 +60,10 @@ const Upload =()=>{
     return(
         <>
             <h1>Upload</h1>
+            
             <div className="upload-function">
                 {/* This is actually an array, so for now we will do one image at a time */}
-                <input type='file' onChange={(event)=>{setImageUpload(event.target.files[0])}}/>
+                <input type='file' onChange={(event)=>{setImageUpload(event.target.files)}}/>
                 <Button onClick={uploadImage}>Upload Image</Button>
             </div>
             {imageList.map((url)=>{

@@ -20,6 +20,7 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/upload' element={<Upload/>}/>
         <Route path='/analysis' element={<Analysis/>}/>
+        <Route path='/*' element={<Home/>}/>
       </Routes>
       {/* <div>
         <a href="https://vitejs.dev" target="_blank">
