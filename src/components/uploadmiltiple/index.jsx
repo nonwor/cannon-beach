@@ -29,6 +29,7 @@ const UploadMany =()=>{
         //     console.log("no images uploaded")
         //     alert("Failed")
         // }
+        let imageUploadCount = 0
         for (let image of images){
             const imageRef = ref(storage, `${user_id.uid}/ogimages/${image.name}`)
 
@@ -36,31 +37,19 @@ const UploadMany =()=>{
                 console.log("Response",response)
                 // alert("image uploaded!")
                 // setImageUpload(null);
-            })
+                imageUploadCount += 1
+            }).catch((error) => {
+                alert("Opps something went wrong!")
+                console.log(errorMessage)
+                // ..
+            });
         }
 
-        // console.log("Good to go", imageUpload);
-        // console.log(`${user_id.uid}/ogimages/${imageUpload.name}`)
-        // const imageRef = ref(storage, `${user_id.uid}/ogimages/${imageUpload.name}`)
+        if (imageUploadCount == images.length){
+            alert("Upload Completed!")
+        }
 
-        // uploadBytes(imageRef, imageUpload).then((response)=>{
-        //     console.log("Response",response)
-        //     alert("image uploaded!")
-        //     setImageUpload(null);
-        // })
     }
-
-    //How to get images from firebase
-    // useEffect(()=>{
-    //     listAll(imageListRef).then((response)=>{
-    //         console.log(response);
-    //         response.items.forEach((item)=>{
-    //             getDownloadURL(item).then((url)=>{
-    //                 setImageList((prev)=>[...prev,url])
-    //             })
-    //         })
-    //     })
-    // }, [])
 
     const handleChange =(e)=>{
         for (let i = 0; i < e.target.files.length; i++) {
@@ -80,10 +69,7 @@ const UploadMany =()=>{
                     <input type='file' multiple onChange={handleChange}/>
                     <Button onClick={uploadImage}>Upload Images</Button>
                 </div>
-                {/* {imageList.map((url)=>{
-                    return <img src={url}/>
-                })} */}
-    
+                
             </>
         )
     } else {

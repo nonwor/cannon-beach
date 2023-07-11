@@ -16,7 +16,14 @@ const NavigateBar = () =>{
     const auth = getAuth(app)
 
     const handleLogoutAction =()=>{
-        console.log(user_status)
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log("successful logout")
+            dispatch(clearUserInfo())
+
+          }).catch((error) => {
+            // An error happened.
+          });
     }
 
     useEffect(()=>{
@@ -53,9 +60,9 @@ const NavigateBar = () =>{
                             <Nav className='logged-in-view'>
                                 
                                 <NavDropdown title="Profile" id="basic-nav-dropdown" className="ml-auto">
-                                    <NavDropdown.Item as={Link} to='/userprofile'> Settings </NavDropdown.Item>
+                                    <NavDropdown.Item as={Link} to='/userprofile'> Profile </NavDropdown.Item>
                                     
-                                    <NavDropdown.Item href="#action/3.2"> Data </NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.2"> Data/Usage </NavDropdown.Item>
                                     
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={handleLogoutAction}>

@@ -1,11 +1,11 @@
 import React from "react";
-import UploadMany from "../../components/uploadmiltiple/index.jsx";
+import Retrive from "../../components/retrive/index.jsx";
 
 const Analysis =()=>{
     return(
         <>
             <h1>Analysis</h1>
-            <UploadMany/>
+            <Retrive/>
         </>
     )
 }
