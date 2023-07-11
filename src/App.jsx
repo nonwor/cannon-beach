@@ -10,6 +10,8 @@ import Home from './pages/home'
 import Upload from './pages/upload'
 import Analysis from './pages/analysis'
 import LoginSignup from './pages/login_signup'
+import Usage from './pages/usage'
+import Profile from './pages/profile'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -22,6 +24,8 @@ function App() {
         <Route path='/upload' element={<Upload/>}/>
         <Route path='/analysis' element={<Analysis/>}/>
         <Route path='/loginsignup' element={<LoginSignup/>}/>
+        <Route path='/usage' element={<Usage/>}/>
+        <Route path='/profile' element={<Profile/>}/>
         <Route path='/*' element={<Home/>}/>
       </Routes>
       {/* <div>
