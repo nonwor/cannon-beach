@@ -6,7 +6,7 @@ import {getStorage} from "firebase/storage";
 import {ref, uploadBytes, listAll, getDownloadURL, updateMetadata} from 'firebase/storage';
 import app  from "../../firebase.js";
 import {v4} from 'uuid';
-import UploadMany from "../../components/uploadmiltiple/index.jsx";
+import UploadMany from "../../components/uploadmultiple/index.jsx";
 
 import { useSelector } from "react-redux";
 

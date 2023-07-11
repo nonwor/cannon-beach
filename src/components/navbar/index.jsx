@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {authinfo, clearUserInfo} from '../../slice/authuserSlice.js'
 
 const NavigateBar = () =>{
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
     const user_status = useSelector(state =>state.userInfo);
     let LoggedIn = false
@@ -20,6 +22,7 @@ const NavigateBar = () =>{
             // Sign-out successful.
             console.log("successful logout")
             dispatch(clearUserInfo())
+            navigate('/home')
 
           }).catch((error) => {
             // An error happened.
@@ -89,7 +92,7 @@ const NavigateBar = () =>{
                             </Nav>
                             
                             <Nav className='logged-in-view'>
-                            <Nav.Link as={Link} to="/analysis">Log In/Sign Up</Nav.Link> 
+                            <Nav.Link as={Link} to="/loginsignup">Log In/Sign Up</Nav.Link> 
                                 {/* <NavDropdown title="Profile" id="basic-nav-dropdown" className="ml-auto">
                                     <NavDropdown.Item as={Link} to='/userprofile'> Settings </NavDropdown.Item>
                                     

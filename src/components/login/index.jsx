@@ -6,8 +6,11 @@ import {useState} from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {authinfo,clearUserInfo} from '../../slice/authuserSlice.js'
+import { Link, Navigate, Route, Routes, useNavigate} from 'react-router-dom';
+import './index.css'
 
 const Login = ()=>{
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -28,6 +31,7 @@ const Login = ()=>{
             console.log("signin successful")
             console.log(user.uid, typeof(user.uid));
             dispatch(authinfo(user.uid));
+            navigate('/upload')
             // ...
         })
         .catch((error) => {
@@ -84,15 +88,15 @@ const Login = ()=>{
 
     return(
         <>
-            <div>
-                <h3>Sign In!</h3>
+            <div className="signin-div">
+                <h4>Welcome Back!</h4>
                 <Form className="signin-form">
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>
                     Email
                     </Form.Label>
                     <Col sm={10}>
-                    <Form.Control type="email" placeholder="Email" onChange={(event)=>{setCurrEmail(event.target.value)}}/>
+                    <Form.Control className="inputfield" type="email" placeholder="Email" onChange={(event)=>{setCurrEmail(event.target.value)}}/>
                     </Col>
                 </Form.Group>
 
@@ -101,27 +105,28 @@ const Login = ()=>{
                     Password
                     </Form.Label>
                     <Col sm={10}>
-                    <Form.Control type="password" placeholder="Password" onChange={(event)=>{setCurrPassword(event.target.value)}}/>
+                    <Form.Control className="inputfield" type="password" placeholder="Password" onChange={(event)=>{setCurrPassword(event.target.value)}}/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
-                    <Col sm={{ span: 10, offset: 1 }}>
-                    <Button onClick={handleSignin}>Sign In!</Button>
-                    </Col>
+                    
+                    <Button onClick={handleSignin} className="signin-bnt">Sign In</Button>
+                    
                 </Form.Group>
 
                 </Form>
             </div>
-            <div>
-                <h3>Sign Up!</h3>
+
+            <div className="signup-div">
+                <h4>New to BlueWater? Sign Up Here </h4>
                 <Form>
                 <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                     <Form.Label column sm={2}>
                     Email
                     </Form.Label>
                     <Col sm={10}>
-                    <Form.Control type="email" placeholder="Email" onChange={(event)=>{setEmail(event.target.value)}}/>
+                    <Form.Control className="inputfield" type="email" placeholder="Email" onChange={(event)=>{setEmail(event.target.value)}}/>
                     </Col>
                 </Form.Group>
 
@@ -130,17 +135,17 @@ const Login = ()=>{
                     Password
                     </Form.Label>
                     <Col sm={10}>
-                    <Form.Control type="password" placeholder="Password" onChange={(event)=>{setPassword(event.target.value)}}/>
+                    <Form.Control className="inputfield" type="password" placeholder="Password" onChange={(event)=>{setPassword(event.target.value)}}/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
-                    <Col sm={{ span: 10, offset: 1 }}>
-                    <Button onClick={handleSignUp}>Sign Up!</Button>
-                    </Col>
+                    
+                    <Button className="signin-bnt" onClick={handleSignUp}>Sign Up!</Button>
+                    
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
+                {/* <Form.Group as={Row} className="mb-3">
                     <Col sm={{ span: 10, offset: 1 }}>
                     <Button onClick={handleStateCheck}>Check State</Button>
                     </Col>
@@ -149,7 +154,7 @@ const Login = ()=>{
                     <Col sm={{ span: 10, offset: 1 }}>
                     <Button onClick={handleSignOut}>Sign Out</Button>
                     </Col>
-                </Form.Group>
+                </Form.Group> */}
                 </Form>
             </div>
         </>

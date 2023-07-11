@@ -1,0 +1,35 @@
+.signin-div{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(194, 218, 238);
+    width: 40%;
+    justify-content: center; /* center horizontally */
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.signin-bnt{
+    width: 40%;
+    /* visibility: hidden; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputfield{
+    margin-left: 20px;
+}
+
+.signup-div{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(252, 218, 194);
+    width: 40%;
+    justify-content: center; /* center horizontally */
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
