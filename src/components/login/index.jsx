@@ -1,7 +1,7 @@
 import React from "react";
-import { initializeApp } from "firebase/app";
-import { getAuth,createUserWithEmailAndPassword,onAuthStateChanged,signOut, signInWithEmailAndPassword} from "firebase/auth";
-import app from '../../firebase';
+// import { initializeApp } from "firebase/app";
+// import { getAuth,createUserWithEmailAndPassword,onAuthStateChanged,signOut, signInWithEmailAndPassword} from "firebase/auth";
+// import app from '../../firebase';
 import {useState} from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,7 +23,7 @@ const Login = ()=>{
     const[currPassword, setCurrPassword] = useState('');
     // console.log(email)
 
-    const auth = getAuth(app)
+    // const auth = getAuth(app)
 
     const handleSignin=()=>{
 

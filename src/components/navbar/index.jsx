@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { getAuth,createUserWithEmailAndPassword,onAuthStateChanged,signOut, signInWithEmailAndPassword} from "firebase/auth";
-import app from '../../firebase';
+// import { getAuth,createUserWithEmailAndPassword,onAuthStateChanged,signOut, signInWithEmailAndPassword} from "firebase/auth";
+// import app from '../../firebase';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Navbar, Nav, NavDropdown, Container} from 'react-bootstrap';
 import { Link, useNavigate} from 'react-router-dom';
@@ -16,7 +16,7 @@ const NavigateBar = () =>{
     const user_status = useSelector(state =>state.userInfo);
     let LoggedIn = false
 
-    const auth = getAuth(app)
+    // const auth = getAuth(app)
 
     const handleLogoutAction =()=>{
         axios({
