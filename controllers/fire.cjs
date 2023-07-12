@@ -1,5 +1,5 @@
 const {app} = require('../config/firebase.cjs')
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } = require("firebase/auth");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } = require("firebase/auth");
 
 console.log("Connected to Firebase");
 
@@ -35,29 +35,50 @@ const logIn=async(req, res)=>{
             console.log("signin successful")
             console.log(user.uid, typeof(user.uid));
             res.status(200).json(user.uid);
-
-            // dispatch(authinfo(user.uid));
-            // navigate('/upload')
-            // ...
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             res.status(400).json("error at login")
         });
-
-    // res.status(200).json(req.body)
 }
 
 const createUser = async(req, res)=>{
 
-    
+  console.log(req.body)
+  createUserWithEmailAndPassword(auth, req.body.email, req.body.password)
+      .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log("signup successful")
+          console.log(user.uid, typeof(user.uid));
+          res.status(200).json(user.uid);
+      })
+      .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          res.status(400).json("error at login")
+      });
+}
 
-    res.status(200)
+const logOut = async(req, res)=>{
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    console.log("successful logout")
+    // dispatch(clearUserInfo())
+    // navigate('/home')
+    res.status(200).json('Successful logout')
+
+  }).catch((error) => {
+    // An error happened.
+    res.status(400).json('error at logout')
+  });
+
 }
 
 module.exports = {
   checkUser,
   logIn,
   createUser,
+  logOut,
 };

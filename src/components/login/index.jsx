@@ -16,8 +16,8 @@ const Login = ()=>{
 
     const dispatch = useDispatch()
 
-    const[email, setEmail] = useState('');
-    const[password, setPassword] = useState('');
+    const[newEmail, setNewEmail] = useState('');
+    const[newPassword, setNewPassword] = useState('');
 
     const[currEmail, setCurrEmail] = useState('');
     const[currPassword, setCurrPassword] = useState('');
@@ -47,7 +47,37 @@ const Login = ()=>{
     const handleSignUp =()=>{
         // console.log(email)
         // console.log(password)
+        axios({
+            method: 'post',
+            url: `${import.meta.env.VITE_NODE_ENV}/createuser`,
+            data: {
+                email: newEmail,
+                password: newPassword,
+            }
+          }).then((response) => {
 
+            console.log(response);
+            // This is when we initialized the mongo db with credits
+            axios({
+                method: 'post',
+                url: 'http://localhost:3000/users',
+                data: {
+                    id: response.data,
+                    credit: 100,
+                    usage: 0
+                }
+                }).then((response) => {
+                console.log(response);
+                }, (error) => {
+                console.log(error);
+                });
+
+            dispatch(authinfo(response.data));
+            navigate('/upload')
+
+          }, (error) => {
+            console.log(error);
+          });
         // axios({
         //     method: 'post',
         //     url: `${import.meta.env.VITE_NODE_ENV}/login`,
@@ -108,16 +138,16 @@ const Login = ()=>{
         }
     }
 
-    const handleSignOut = () =>{
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            console.log("successful logout")
-            dispatch(clearUserInfo())
+    // const handleSignOut = () =>{
+    //     signOut(auth).then(() => {
+    //         // Sign-out successful.
+    //         console.log("successful logout")
+    //         dispatch(clearUserInfo())
 
-          }).catch((error) => {
-            // An error happened.
-          });
-    }
+    //       }).catch((error) => {
+    //         // An error happened.
+    //       });
+    // }
 
     return(
         <>
@@ -159,7 +189,7 @@ const Login = ()=>{
                     Email
                     </Form.Label>
                     <Col sm={10}>
-                    <Form.Control className="inputfield" type="email" placeholder="Email" onChange={(event)=>{setEmail(event.target.value)}}/>
+                    <Form.Control className="inputfield" type="email" placeholder="Email" onChange={(event)=>{setNewEmail(event.target.value)}}/>
                     </Col>
                 </Form.Group>
 
@@ -168,7 +198,7 @@ const Login = ()=>{
                     Password
                     </Form.Label>
                     <Col sm={10}>
-                    <Form.Control className="inputfield" type="password" placeholder="Password" onChange={(event)=>{setPassword(event.target.value)}}/>
+                    <Form.Control className="inputfield" type="password" placeholder="Password" onChange={(event)=>{setNewPassword(event.target.value)}}/>
                     </Col>
                 </Form.Group>
 
