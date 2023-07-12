@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema(
     {
         id: String,
         credit: Number,
+        usage: Number,
     },
     {timestamps: true}
 );

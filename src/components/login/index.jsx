@@ -9,6 +9,8 @@ import {authinfo,clearUserInfo} from '../../slice/authuserSlice.js'
 import { Link, Navigate, Route, Routes, useNavigate} from 'react-router-dom';
 import './index.css'
 
+import axios from 'axios';
+
 const Login = ()=>{
     const navigate = useNavigate()
 
@@ -49,6 +51,23 @@ const Login = ()=>{
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                console.log("new user id", user.uid)
+
+                // This is when we initialized the mongo db with credits
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:3000/users',
+                    data: {
+                        id: user.uid,
+                        credit: 100,
+                        usage: 0
+                    }
+                  }).then((response) => {
+                    console.log(response);
+                  }, (error) => {
+                    console.log(error);
+                  });;
+
                 // ...
             })
             .catch((error) => {
