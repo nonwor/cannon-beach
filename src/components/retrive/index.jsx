@@ -6,6 +6,7 @@ import {getStorage} from "firebase/storage";
 import {ref, uploadBytes, listAll, getDownloadURL, updateMetadata, list} from 'firebase/storage';
 import app  from "../../firebase.js";
 import {v4} from 'uuid';
+import axios from 'axios';
 
 import { useSelector } from "react-redux";
 
@@ -18,11 +19,11 @@ const Retrive =()=>{
 
     //User id/ogimages/
     const user_id = useSelector(state =>state.userInfo);
-    // console.log(user_id)
+    console.log("this should be empty",user_id)
 
     const imageListRef = ref(storage, `${user_id.uid}`)
 
-    //How to get images from firebase
+    //How to get images from firebasegit p
     useEffect(()=>{
         list(imageListRef).then((response)=>{
             setFolderList([]);
@@ -38,7 +39,55 @@ const Retrive =()=>{
         })
     }, [])
 
-    console.log(folderList)
+    console.log("folder list",folderList)
+
+    const handleFolder=(item)=>{
+        console.log("Hello folder")
+        console.log("folder name?", item)
+        //Reset display
+        setImageList([])
+        //Show images in the folder that we clicked on
+        const imageListRef = ref(storage, item)
+        listAll(imageListRef).then((response)=>{
+            console.log("res",response);
+            response.items.forEach((item)=>{
+                getDownloadURL(item).then((url)=>{
+                    setImageList((prev)=>[...prev, url])
+                })
+            })
+        })
+    }
+    const handleTrain=(item)=>{
+        console.log("Do transaction", item)
+        let costToTrain = 0;
+        const imageListRef = ref(storage, item)
+        listAll(imageListRef).then((response)=>{
+            console.log(response.items.length)
+            costToTrain = response.items.length;
+            
+            //update usage(+) and credit(-)
+            axios({
+                method: 'put',
+                url: `http://localhost:3000/users/credit/${user_id.uid}/${-costToTrain}`,
+            }).then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            });
+
+            axios({
+                method: 'put',
+                url: `http://localhost:3000/users/usage/${user_id.uid}/${+costToTrain}`,
+            }).then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            });
+
+            
+        })
+        // console.log("Cost to train:", costToTrain)
+    }
 
     if(user_id.uid != ''){
         return(
@@ -47,10 +96,25 @@ const Retrive =()=>{
                 
                 <div className="imageBatch">
                     {folderList.map((item)=>{
-                        return <button key={v4()} onclick >{item}</button>
+                        if(item.includes("ogimages")){
+                            return (
+                                <>  
+                                    <button key={v4()} onClick={()=>{handleFolder(item)}} >{item}</button>
+                                    <Button variant="primary" className="train-me" onClick={()=>handleTrain(item)}>Train</Button>
+                                </>
+                            )
+                        } else {
+                            return(
+                                <button key={v4()} onClick={()=>{handleFolder(item)}} >{item}</button>
+                            )
+                        }
+
                     })}
-                    <Button variant="primary">Train</Button>
                 </div>
+                {imageList.map((url)=>{
+                    return <img src={url}/>
+                })}
+
 
             </>
         )
