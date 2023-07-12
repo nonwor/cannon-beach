@@ -5,7 +5,6 @@ mongoose.connect(process.env.MONGO_URL, {
     useUnifiedTopology: true,
 });
 
-
 mongoose.connection.once('open', ()=> {
     console.log('connected to mongo');
 }); 

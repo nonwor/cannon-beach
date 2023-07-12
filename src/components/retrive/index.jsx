@@ -32,10 +32,6 @@ const Retrive =()=>{
                 console.log(i._location.path_)
                 setFolderList(folderList=>[...folderList, i._location.path_]);
             }
-            // console.log(folderList)
-            // response.prefixs.map((item)=>{
-            //     console.log(item)
-            // })
         })
     }, [])
 
@@ -68,7 +64,7 @@ const Retrive =()=>{
             //update usage(+) and credit(-)
             axios({
                 method: 'put',
-                url: `http://localhost:3000/users/credit/${user_id.uid}/${-costToTrain}`,
+                url: `${import.meta.env.VITE_NODE_ENV}/users/credit/${user_id.uid}/${-costToTrain}`,
             }).then((response) => {
                 console.log(response);
             }, (error) => {
@@ -77,14 +73,12 @@ const Retrive =()=>{
 
             axios({
                 method: 'put',
-                url: `http://localhost:3000/users/usage/${user_id.uid}/${+costToTrain}`,
+                url: `${import.meta.env.VITE_NODE_ENV}/users/usage/${user_id.uid}/${+costToTrain}`,
             }).then((response) => {
                 console.log(response);
             }, (error) => {
                 console.log(error);
             });
-
-            
         })
         // console.log("Cost to train:", costToTrain)
     }
@@ -114,8 +108,6 @@ const Retrive =()=>{
                 {imageList.map((url)=>{
                     return <img src={url}/>
                 })}
-
-
             </>
         )
     } else {

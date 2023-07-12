@@ -22,76 +22,90 @@ const Login = ()=>{
     const[currEmail, setCurrEmail] = useState('');
     const[currPassword, setCurrPassword] = useState('');
     // console.log(email)
+
     const auth = getAuth(app)
 
     const handleSignin=()=>{
 
-        signInWithEmailAndPassword(auth, currEmail, currPassword)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log("signin successful")
-            console.log(user.uid, typeof(user.uid));
-            dispatch(authinfo(user.uid));
+         axios({
+            method: 'post',
+            url: `${import.meta.env.VITE_NODE_ENV}/login`,
+            data: {
+                email: currEmail,
+                password: currPassword,
+            }
+          }).then((response) => {
+            console.log(response);
+            dispatch(authinfo(response.data));
             navigate('/upload')
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
+
+          }, (error) => {
+            console.log(error);
+          });
     }
 
     const handleSignUp =()=>{
-        console.log(email)
-        console.log(password)
+        // console.log(email)
+        // console.log(password)
 
-        // Use firebase to make a new user
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log("new user id", user.uid)
+        // axios({
+        //     method: 'post',
+        //     url: `${import.meta.env.VITE_NODE_ENV}/login`,
+        //     data: {
+        //         email: email,
+        //         password: password,
+        //     }
+        //   }).then((response) => {
+        //     console.log(response);
+        //     const user = response;
+        //     console.log("new user id", user.uid)
 
-                // This is when we initialized the mongo db with credits
-                axios({
-                    method: 'post',
-                    url: 'http://localhost:3000/users',
-                    data: {
-                        id: user.uid,
-                        credit: 100,
-                        usage: 0
-                    }
-                  }).then((response) => {
-                    console.log(response);
-                  }, (error) => {
-                    console.log(error);
-                  });
+        //   }, (error) => {
+        //     console.log(error);
+        //   });
 
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage)
-                // ..
-            });
+        // // Use firebase to make a new user
+        // createUserWithEmailAndPassword(auth, email, password)
+        //     .then((userCredential) => {
+        //         // Signed in 
+        //         const user = userCredential.user;
+        //         console.log("new user id", user.uid)
+
+        //         // This is when we initialized the mongo db with credits
+        //         axios({
+        //             method: 'post',
+        //             url: 'http://localhost:3000/users',
+        //             data: {
+        //                 id: user.uid,
+        //                 credit: 100,
+        //                 usage: 0
+        //             }
+        //           }).then((response) => {
+        //             console.log(response);
+        //           }, (error) => {
+        //             console.log(error);
+        //           });
+
+        //         // ...
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.log(errorMessage)
+        //         // ..
+        //     });
     }
 
-    const handleStateCheck = ()=>{
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/auth.user
-              const uid = user.uid;
-              console.log("Yes we have a user here!", uid)
-              // ...
-            } else {
-              // User is signed out
-              console.log("active user not found!")
-              // ...
-            }
-          });
+    const handleStateCheck = async()=>{
+        try {
+            //We will need to change the user id in this call
+          const response = await axios.get(`${import.meta.env.VITE_NODE_ENV}/checkuser`);
+          console.log("yes we have a user!",response.data);
+        //   setCredits(response.data.credit)
+        //   setUsage(response.data.usage)
+        } catch (error) {
+          console.error('Failed to fetch data:', error);
+        }
     }
 
     const handleSignOut = () =>{
@@ -164,16 +178,11 @@ const Login = ()=>{
                     
                 </Form.Group>
 
-                {/* <Form.Group as={Row} className="mb-3">
-                    <Col sm={{ span: 10, offset: 1 }}>
-                    <Button onClick={handleStateCheck}>Check State</Button>
-                    </Col>
-                </Form.Group>
                 <Form.Group as={Row} className="mb-3">
-                    <Col sm={{ span: 10, offset: 1 }}>
-                    <Button onClick={handleSignOut}>Sign Out</Button>
-                    </Col>
-                </Form.Group> */}
+                    
+                    <Button className="signin-bnt" onClick={handleStateCheck}>Check!</Button>
+                    
+                </Form.Group>
                 </Form>
             </div>
         </>

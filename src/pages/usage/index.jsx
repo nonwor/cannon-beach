@@ -24,7 +24,7 @@ const Usage = ()=>{
     const fetchData = async () => {
         try {
             //We will need to change the user id in this call
-          const response = await axios.get(`http://localhost:3000/users/${user_id.uid}`);
+          const response = await axios.get(`${import.meta.env.VITE_NODE_ENV}/users/${user_id.uid}`);
         //   console.log(response.data);
           setCredits(response.data.credit)
           setUsage(response.data.usage)
@@ -52,7 +52,7 @@ const Usage = ()=>{
             //Make the API call to update the credit
             axios({
                 method: 'put',
-                url: `http://localhost:3000/users/credit/${user_id.uid}/${amount}`,
+                url: `${import.meta.env.VITE_NODE_ENV}/users/credit/${user_id.uid}/${amount}`,
             }).then((response) => {
                 console.log(response);
                 fetchData();

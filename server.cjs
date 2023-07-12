@@ -18,6 +18,7 @@ app.use(express.json());
 console.log("server running!")
 
 const {getUsers, createUsers, getUsersId, updateUsage, updateCredit} = require('./controllers/users.cjs')
+const {checkUser, logIn, createUser} = require('./controllers/fire.cjs')
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {
   res.send('hello world')
@@ -28,5 +29,9 @@ app.get('/users/:id', getUsersId)
 app.post('/users', createUsers)
 app.put('/users/usage/:id/:usage', updateUsage)
 app.put('/users/credit/:id/:credit', updateCredit)
+
+app.get('/checkuser', checkUser)
+app.post('/login', logIn)
+app.post('/createuser', createUser)
 
 app.listen(3000);
