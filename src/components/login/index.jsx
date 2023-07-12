@@ -66,7 +66,7 @@ const Login = ()=>{
                     console.log(response);
                   }, (error) => {
                     console.log(error);
-                  });;
+                  });
 
                 // ...
             })

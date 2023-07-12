@@ -9,6 +9,7 @@ import {v4} from 'uuid';
 import UploadMany from "../../components/uploadmultiple/index.jsx";
 
 import { useSelector } from "react-redux";
+import './index.css'
 
 const Upload =()=>{
 
@@ -25,7 +26,10 @@ const Upload =()=>{
     if(user_id.uid != ''){
         return(
             <>
-               <UploadMany/>
+                <div className="main-uploadiew">
+                    <UploadMany/>
+                </div>
+              
             </>
         )
     } else {

@@ -1,11 +1,15 @@
 import React from "react";
 import Retrive from "../../components/retrive/index.jsx";
+import './index.css'
 
 const Analysis =()=>{
     return(
         <>
-            <h1>Analysis</h1>
-            <Retrive/>
+            <div className="main-analysisview">
+                <h1>Analysis</h1>
+                <Retrive/>
+            </div>
+           
         </>
     )
 }
