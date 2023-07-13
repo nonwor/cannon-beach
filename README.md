@@ -9,9 +9,7 @@ openCV, pytorch, matplotlib, numpy
 
 
 ## Front-end
-React, Redux, Router, Bootstrap
-
-![Home](webappImage/home.PNG)
+React/Vite, Redux, Router, Bootstrap
 
 ## Back-end
 Express, MongoDB, Firebase
@@ -19,3 +17,8 @@ Express, MongoDB, Firebase
 ## Features:
 User auth, image upload, add credits and usage data.
 
+## React App in action local
+![Home](webappImage/home.PNG)
+![Home](webappImage/login.PNG)
+![Home](webappImage/retrive.PNG)
+![Home](webappImage/usage_payments.PNG)
