@@ -8,7 +8,7 @@ openCV, pytorch, matplotlib, numpy
 ## Front-end
 React, Redux, Router, Bootstrap
 
-![alt text](webappImage\home.PNG)
+![Home]('./webappImage/home.PNG')
 
 ## Back-end
 Express, MongoDB, Firebase
