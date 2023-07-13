@@ -1,8 +1,12 @@
 # cannon-beach
-This research project is a collaboration effort w/ my academic partner to segment and identify algae samples from microscope. The goal is to build a tool that helps marine researchers indentify alage from a micro scope image. The process to indentifly algae contains two parts. One, image sementation. This is achieved via image blur and boundry seperation. Image sementation is needed due to the nature of the images from the lab. At times, multiple alage can be in one mircoscope image, additionally traning/labeled images are more "zoomed" in, just for the yhat calculation, we need to zoom in a bit on the microscope images to aid the model calculation. 
+This research project is a collaborative effort between me and my academic partner, aimed at segmenting and identifying algae samples from microscope images. Our ultimate goal is to develop a tool that assists marine researchers in identifying algae based on microscope images. The algae identification process consists of two main parts: image segmentation and classification.
 
-In short:<br />
-User images -> image processing -> image classification -> result/reporting. 
+Firstly, we employ image segmentation techniques, including image blur and boundary separation, to effectively isolate individual algae within the microscope images. This step is crucial because the lab-generated images often contain multiple algae instances. Moreover, the training/labeled images are zoomed in to enhance the accuracy of the classification model. Consequently, we also need to zoom in slightly on the microscope images to facilitate the model's calculations.
+
+
+
+In summary, the workflow of our project can be outlined as follows:<br />
+User images -> image processing -> image classification -> result/reporting. <br />
 User makes corrections -> add new images to traning set -> rerun image classification model. 
 
 ## Build and run from root
@@ -13,6 +17,7 @@ nodemon server.cjs
 ```
 
 .env file <br />
+```
 VITE_API_KEY=###<br />
 VITE_AUTH_DOMAIN=###<br />
 VITE_PROJECT_ID=###<br />
@@ -23,7 +28,7 @@ VITE_APP_ID=###<br />
 MONGO_URL=###<br />
 
 VITE_NODE_ENV=###<br />
-
+```
 
 
 ## Image segmentation and CV model
@@ -40,7 +45,7 @@ React/Vite, Redux, Router, Bootstrap
 Express, MongoDB, Firebase
 
 ## Features:
-User auth, image upload, add credits and usage data.<br />
+User auth, signin, sign out, image upload, add credits and usage data.<br />
 Inprogress: Process uploaded images, modify meta info, generate report
 
 ## React App in action local
