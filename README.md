@@ -5,6 +5,25 @@ In short:<br />
 User images -> image processing -> image classification -> result/reporting. 
 User makes corrections -> add new images to traning set -> rerun image classification model. 
 
+## Build and run from root
+npm install
+npm run dev
+nodemon server.cjs
+
+.env file <br />
+VITE_API_KEY=###
+VITE_AUTH_DOMAIN=###
+VITE_PROJECT_ID=###
+VITE_STORAGE_BUCKET=###
+VITE_MESSAGING_SENDER_ID=###
+VITE_APP_ID=###
+
+MONGO_URL=###
+
+VITE_NODE_ENV='http://localhost:3000'
+
+
+
 ## Image segmentation and CV model
 openCV, pytorch, matplotlib, numpy
 ![Alage1](webappImage/1688538380784.jpg)
