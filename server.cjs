@@ -36,6 +36,6 @@ app.post('/login', logIn)
 app.post('/createuser', createUser)
 app.get('/logout', logOut)
 
-app.post('/uploadimage', uploadImage)
+app.post('/uploadimage/:id/:folder/:imgname', uploadImage)
 
 app.listen(3000);

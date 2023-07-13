@@ -13,11 +13,6 @@ import './index.css'
 
 const Upload =()=>{
 
-    const[imageUpload, setImageUpload] = useState(null);
-    const[imageList, setImageList] = useState([]);
-    
-    // const storage = getStorage(app);
-
     //User id/ogimages/
     const user_id = useSelector(state =>state.userInfo);
     console.log(user_id)

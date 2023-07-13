@@ -6,7 +6,10 @@ const storage = getStorage(app);
 const uploadImage = async(req, res)=>{
 
     console.log("made it to axios")
-    console.log("body", req.body)
+    console.log("body", req.file)
+    console.log(req.params.id)
+    console.log(req.params.folder)
+    console.log(req.params.imagname)
     // const imageRef = ref(storage, req.params)
 
     // uploadBytes(imageRef, image).then((response)=>{

@@ -36,71 +36,31 @@ const UploadMany =()=>{
 
         for (let image of images){
             // we need to make individual axios calls
-            // let formData = new FormData({'image': image,'path': `${user_id.uid}/ogimages/${image.name}` });
+            const formData = new FormData();
             console.log(image)
-            // console.log(`${user_id.uid}/ogimages/${image.name}`)
-            // formData.('image', image);
+            console.log(image.name)
+            // // console.log(`${user_id.uid}/ogimages/${image.name}`)
+            // formData.append('image', image);
             // formData.append('path', `${user_id.uid}/ogimages/${image.name}`)
 
-            // console.log("trying to make axio call on one image", formData)
-            const reader = new FileReader();
-
-            reader.onload = (event) => {
-                const base64 = event.target.result;
-                // setBase64Data(base64);
-                };
-
-            reader.readAsDataURL(image);
+            // console.log("trying to make axio call on one image", formData.entries())
+            var reader = new FileReader();
+            let imageAs64Bit
+            reader.onloadend = function() {
+                console.log('RESULT', reader.result)
+            }
+            console.log("Something here",reader.readAsDataURL(image))
 
             axios({
                 method: 'Post',
-                url: `${import.meta.env.VITE_NODE_ENV}/uploadimage`,
-                // data: formData,
-                // data:{image}
-                data: {
-                   image: reader,
-                   path:`${user_id.uid}/ogimages/${image.name}`
-                  }
+                url: `${import.meta.env.VITE_NODE_ENV}/uploadimage/${user_id.uid}/ogimages/${image.name}`,
+                // data: "a"
               }).then((response) => {
                 console.log("res from server",response);
-               
               }, (error) => {
                 console.log(error);
-                
               });
-            }
-
-        //     try {
-        //         const response = await axios.post('/api/upload', formData, {
-        //           headers: {
-        //             'Content-Type': 'multipart/form-data'
-        //           }
-        //         });
-                
-        //         console.log('Image uploaded:', response.data);
-        //         // Perform further actions with the response data if needed
-        //       } catch (error) {
-        //         console.error('Failed to upload image:', error);
-        //         // Handle the error condition
-        //       }
-        //     //
-        //     const imageRef = ref(storage, `${user_id.uid}/ogimages/${image.name}`)
-
-        //     uploadBytes(imageRef, image).then((response)=>{
-        //         console.log("Response",response)
-        //         // alert("image uploaded!")
-        //         // setImageUpload(null);
-        //         imageUploadCount += 1
-        //     }).catch((error) => {
-        //         alert("Opps something went wrong!")
-        //         console.log(errorMessage)
-        //         // ..
-        //     });
-        // }
-
-        // if (imageUploadCount == images.length){
-        //     alert("Upload Completed!")
-        // }
+        }
     }
 
     const handleChange =(e)=>{
