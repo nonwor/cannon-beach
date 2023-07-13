@@ -6,21 +6,23 @@ User images -> image processing -> image classification -> result/reporting.
 User makes corrections -> add new images to traning set -> rerun image classification model. 
 
 ## Build and run from root
+```
 npm install
 npm run dev
 nodemon server.cjs
+```
 
 .env file <br />
-VITE_API_KEY=###
-VITE_AUTH_DOMAIN=###
-VITE_PROJECT_ID=###
-VITE_STORAGE_BUCKET=###
-VITE_MESSAGING_SENDER_ID=###
-VITE_APP_ID=###
+VITE_API_KEY=###<br />
+VITE_AUTH_DOMAIN=###<br />
+VITE_PROJECT_ID=###<br />
+VITE_STORAGE_BUCKET=###<br />
+VITE_MESSAGING_SENDER_ID=###<br />
+VITE_APP_ID=###<br />
 
-MONGO_URL=###
+MONGO_URL=###<br />
 
-VITE_NODE_ENV='http://localhost:3000'
+VITE_NODE_ENV='http://localhost:3000'<br />
 
 
 
