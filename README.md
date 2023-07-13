@@ -22,7 +22,7 @@ VITE_APP_ID=###<br />
 
 MONGO_URL=###<br />
 
-VITE_NODE_ENV='http://localhost:3000'<br />
+VITE_NODE_ENV=###<br />
 
 
 
@@ -40,7 +40,7 @@ React/Vite, Redux, Router, Bootstrap
 Express, MongoDB, Firebase
 
 ## Features:
-User auth, image upload, add credits and usage data.
+User auth, image upload, add credits and usage data.<br />
 Inprogress: Process uploaded images, modify meta info, generate report
 
 ## React App in action local
