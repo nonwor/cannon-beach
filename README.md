@@ -3,6 +3,9 @@ This research project is a collaboration effort w/ my academic partner to segmen
 
 ## Image segmentation and CV model
 openCV, pytorch, matplotlib, numpy
+![Alage1](webappImage/1688538380784.jpg)
+![Alage1](webappImage/1688538381758.jpg)
+![Alage1](webappImage/1688627875946.jpg)
 
 
 ## Front-end
