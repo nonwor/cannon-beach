@@ -39,6 +39,7 @@ Express, MongoDB, Firebase
 
 ## Features:
 User auth, image upload, add credits and usage data.
+Inprogress: Process uploaded images, modify meta info, generate report
 
 ## React App in action local
 ![Home](webappImage/home.PNG)
