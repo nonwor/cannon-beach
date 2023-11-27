@@ -7,7 +7,7 @@ Firstly, we employ image segmentation techniques, including image blur and bound
 
 In summary, the workflow of our project can be outlined as follows:<br />
 User images -> image processing -> image classification -> result/reporting. <br />
-User makes corrections -> add new images to traning set -> rerun image classification model. 
+User makes corrections -> add new images to training set -> rerun image classification model. 
 
 ## Build and run from root
 ```
